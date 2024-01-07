@@ -68,16 +68,14 @@ body {
 
 @keyframes rotate {
     from {
-        transform: rotate(300deg); /* Startwinkel */
+        transform: rotate(7deg);
     }
     to {
-        transform: rotate(360deg); /* Endwinkel */
+        transform: rotate(360deg);
     }
 }
 
 #rotateGroup {
-    /* Transformationsursprung in der Mitte des Elements setzen */
-    transform-origin: 100px 100px;
-    /* Animationsdefinition */
-    animation: rotate 4s radians infinite; /* 5s für eine volle Drehung, unendliche Wiederholung */
+    transform-origin: 161px 161px;
+    animation: rotate 9s linear infinite;
 }
