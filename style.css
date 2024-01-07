@@ -103,18 +103,27 @@ body {
     flex: 1; 
 }
 
-@keyframes rotate {
-    from {
-        transform: rotate(7deg);
+@keyframes rotateAndScale {
+    0% {
+        transform: rotate(7deg) scale(1);
     }
-    to {
-        transform: rotate(360deg);
+    25% {
+        transform: rotate(100.5deg) scale(0.9); 
+    }
+    50% {
+        transform: rotate(183.5deg) scale(1.0); 
+    }
+    75% {
+        transform: rotate(300.5deg) scale(0.9); 
+    }
+    100% {
+        transform: rotate(360deg) scale(1);
     }
 }
 
 #rotateGroup {
     transform-origin: 161px 161px;
-    animation: rotate 9s linear infinite;
+    animation: rotateAndScale 8s linear infinite;
 }
 
 
