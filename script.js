@@ -47,7 +47,7 @@ function toggleSvg() {
         counterContainer.style.display = 'block';
 
         startTimer(); // Startet den Timer, wenn openLamb angezeigt wird
-        counterContainer.innerHTML = 'Das grüne Leuchten ist seit</br> <span id="minutes">0</span> Minuten und <span id="seconds">0</span> Sekunden </br>geöffnet.'; // Setzt den ursprünglichen Text zurück
+        counterContainer.innerHTML = 'Das grüne Leuchten ist seit<strong></br> <span id="minutes">0</span> Minuten und <span id="seconds">0</span> Sekunden </br></strong>geöffnet.'; // Setzt den ursprünglichen Text zurück
     }
 }
 
