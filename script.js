@@ -1,29 +1,25 @@
-// Definiere Variablen für die verschiedenen Elemente
 var openLamb = document.getElementById('open_lamb');
 var closedLamb = document.getElementById('closed_lamb');
 var openPlate = document.getElementById('open_plate');
 var closedPlate = document.getElementById('closed_plate');
-var statusContainer = document.getElementById('statusContainer'); // Textcontainer, wenn geschlossen
-var counterContainer = document.getElementById('counterContainer'); // Textcontainer, wenn geöffnet
+var statusContainer = document.getElementById('statusContainer');
+var counterContainer = document.getElementById('counterContainer');
 
-let timerId = null; // Variable zum Speichern der Intervall-ID
-let seconds = 0; // Startwert der Sekunden
-let minutes = 0; // Startwert der Minuten
+let timerId = null; 
+let seconds = 0; 
+let minutes = 0;
 
-// Initialisiere die Anzeige beim Laden der Seite
+
 function initializeDisplay() {
-    // Setze anfängliche Sichtbarkeit der counterContainer
-    statusContainer.style.display = 'block'; // Zeige den geschlossenen Status zuerst an
-    counterContainer.style.display = 'none'; // Verberge den geöffneten Status zuerst
+    statusContainer.style.display = 'block'; 
+    counterContainer.style.display = 'none'; 
 
-    // Initialisiere die Lampe und den Teller
     openLamb.style.display = 'none';
     closedLamb.style.display = 'block';
     openPlate.style.display = 'none';
     closedPlate.style.display = 'block';
 }
 
-// Funktion zum Umschalten der SVG-Anzeige und Timer
 function toggleSvg() {
     if(openLamb.style.display === 'block') {
         openLamb.style.display = 'none';
@@ -31,7 +27,6 @@ function toggleSvg() {
         openPlate.style.display = 'none';
         closedPlate.style.display = 'block';
 
-        // Schalte zwischen den Counter-Containern um
         statusContainer.style.display = 'block';
         counterContainer.style.display = 'none';
 
