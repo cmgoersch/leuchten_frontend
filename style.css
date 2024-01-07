@@ -51,7 +51,7 @@ body {
 
 
 .timerOff {
-    padding: 1rem;
+    padding: 1.5rem;
     display: flex;
     text-align: center;
     font-size: 1.2rem;
@@ -62,7 +62,7 @@ body {
 
 
 .timerOn {
-    padding: 1rem;
+    padding: 1.5rem;
     display: flex;
     text-align: center;
     font-size: 1.2rem;
@@ -83,7 +83,7 @@ body {
 }
 
 .logoGaenge {
-    width: 19%;  /* oder einen festen Wert wie 150px */
+    width: 21%;  /* oder einen festen Wert wie 150px */
     
     color: #b3b3b3;
     flex: 0 0 auto; /* Verhindert, dass das SVG schrumpft oder wächst */
