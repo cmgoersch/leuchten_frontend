@@ -105,16 +105,16 @@ body {
 
 @keyframes rotateAndScale {
     0% {
-        transform: rotate(7deg) scale(1);
+        transform: rotate(0deg) scale(1);
     }
     25% {
-        transform: rotate(100.5deg) scale(0.9); 
+        transform: rotate(95.5deg) scale(0.9); 
     }
     50% {
         transform: rotate(183.5deg) scale(1.0); 
     }
     75% {
-        transform: rotate(300.5deg) scale(0.9); 
+        transform: rotate(290.5deg) scale(0.9); 
     }
     100% {
         transform: rotate(360deg) scale(1);
@@ -123,7 +123,7 @@ body {
 
 #rotateGroup {
     transform-origin: 161px 161px;
-    animation: rotateAndScale 8s linear infinite;
+    animation: rotateAndScale 10s linear infinite;
 }
 
 
