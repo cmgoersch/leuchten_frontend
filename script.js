@@ -47,7 +47,7 @@ function toggleSvg() {
         counterContainer.style.display = 'block';
 
         startTimer(); // Startet den Timer, wenn openLamb angezeigt wird
-        counterContainer.innerHTML = 'Das grüne Leuchten ist seit <span id="minutes">0</span> Minuten und <span id="seconds">0</span> Sekunden geöffnet.'; // Setzt den ursprünglichen Text zurück
+        counterContainer.innerHTML = 'Das grüne Leuchten ist seit</br> <span id="minutes">0</span> Minuten und <span id="seconds">0</span> Sekunden </br>geöffnet.'; // Setzt den ursprünglichen Text zurück
     }
 }
 
@@ -84,7 +84,7 @@ function stopTimer() {
     minutes = 0;
     document.getElementById('seconds').innerText = seconds;
     document.getElementById('minutes').innerText = minutes;
-    statusContainer.innerHTML = 'Das grüne Leuchten ist momentan geschlossen. Wenn es öffnet, siehst du es hier.';
+    statusContainer.innerHTML = 'Das grüne Leuchten ist geschlossen. </br> Wenn es öffnet, siehst du es hier.';
 }
 
 // Rufe die Initialisierungsfunktion auf, wenn das Fenster geladen wird
