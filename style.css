@@ -50,8 +50,20 @@ body {
 }
 
 
-.timer {
+.timerOff {
+    padding: 1rem;
     display: flex;
+    text-align: center;
+    font-size: 1.2rem;
+    justify-content: center;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    color: aliceblue;
+}
+
+.timerOn {
+    padding: 1rem;
+    display: flex;
+    text-align: center;
     font-size: 1.2rem;
     justify-content: center;
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
@@ -79,3 +91,5 @@ body {
     transform-origin: 161px 161px;
     animation: rotate 9s linear infinite;
 }
+
+
