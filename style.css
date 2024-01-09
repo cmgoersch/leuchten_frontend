@@ -71,6 +71,21 @@ body {
     color: aliceblue;
 }
 
+.addToHomeScreen {
+    display: flex;
+    position: relative;
+    left: 50%;
+    transform: translate(-50%, +100%);
+    color: #333333;
+    background-color: #b3b3b3;;
+    border: none;
+    border-radius: 0.9rem;
+    padding: 10px;
+    font-size: 0.7rem;
+    font-weight: 700;
+}
+
+
 .footer {
     display: flex;
     justify-content: space-between; 
@@ -81,6 +96,7 @@ body {
     font-size: 0.76rem;
     flex-wrap: wrap; 
 }
+
 
 .logoGaenge {
     width: 21%; 

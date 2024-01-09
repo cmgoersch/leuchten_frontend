@@ -9,7 +9,6 @@ let timerId = null;
 let seconds = 0; 
 let minutes = 0;
 
-
 function initializeDisplay() {
     statusContainer.style.display = 'block'; 
     counterContainer.style.display = 'none'; 
@@ -37,18 +36,24 @@ function toggleSvg() {
         openPlate.style.display = 'block';
         closedPlate.style.display = 'none';
 
-        // Schalte zwischen den Counter-Containern um
         statusContainer.style.display = 'none';
         counterContainer.style.display = 'block';
 
         startTimer(); // Startet den Timer, wenn openLamb angezeigt wird
-        counterContainer.innerHTML = 'Das grüne Leuchten ist seit<strong></br> <span id="minutes">0</span> Minuten und <span id="seconds">0</span> Sekunden </strong>geöffnet.'; // Setzt den ursprünglichen Text zurück
+        counterContainer.innerHTML = 'Das grüne Leuchten ist seit <strong></br> <span id="minutes">0</span> Minuten und <span id="seconds">0</span> Sekunden </strong>geöffnet.'; // Setzt den ursprünglichen Text zurück
     }
+
+    toggleFavicon(); // Fügt das Umschalten des Favicons hinzu
 }
 
-// Event-Listener für das Klicken auf die SVG-Elemente
-openLamb.addEventListener('click', toggleSvg);
-closedLamb.addEventListener('click', toggleSvg);
+function toggleFavicon() {
+    var favicon = document.getElementById('favicon');
+    if(openLamb.style.display === 'block') {
+        favicon.href = '/public/favOn.svg'; // Pfad zum "eingeschalteten" Favicon
+    } else {
+        favicon.href = '/public/favOff.svg'; // Pfad zum "ausgeschalteten" Favicon
+    }
+}
 
 // Funktion zum Inkrementieren der Zeit
 function incrementTime() {
@@ -68,21 +73,46 @@ function startTimer() {
     }
 }
 
-// Funktion zum Stoppen des Timers
+// Funktion zum Stoppen und Zurücksetzen des Timers
 function stopTimer() {
-    if (timerId !== null) { // Stoppt das Intervall, wenn es läuft
-        clearInterval(timerId);
+    if (timerId !== null) {
+        clearInterval(timerId); // Stoppt das Intervall
         timerId = null;
+        seconds = 0;
+        minutes = 0;
+        document.getElementById('seconds').innerText = '0';
+        document.getElementById('minutes').innerText = '0';
     }
-    // Setzt Timer und Text für beide Counter-Container zurück
-    seconds = 0;
-    minutes = 0;
-    document.getElementById('seconds').innerText = seconds;
-    document.getElementById('minutes').innerText = minutes;
-    statusContainer.innerHTML = 'Das grüne Leuchten ist geschlossen. </br> Wenn es öffnet, siehst du es hier.';
 }
+
+// Event-Listener für das Klicken auf die SVG-Elemente
+openLamb.addEventListener('click', toggleSvg);
+closedLamb.addEventListener('click', toggleSvg);
+
+// Initialisiert die Anzeige beim Laden der Seite
+initializeDisplay();
+
+
+
+
+
+
 
 // Rufe die Initialisierungsfunktion auf, wenn das Fenster geladen wird
 window.onload = initializeDisplay;
 
+self.addEventListener('install', (event) => {
+    console.log('Service Worker installing.');
+});
 
+self.addEventListener('activate', (event) => {
+    console.log('Service Worker activated.');
+});
+
+self.addEventListener('fetch', (event) => {
+    // Hier können Sie benutzerdefinierte Logik für das Netzwerk-Request-Handling hinzufügen.
+});
+
+document.getElementById('addToHomeScreen').addEventListener('click', function() {
+    alert('Um diese App zum Startbildschirm hinzuzufügen, öffnen Sie das Browser-Menü und wählen Sie "Zum Startbildschirm hinzufügen".');
+  });

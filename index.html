@@ -8,6 +8,7 @@
     <title>leuchten</title>
     <link rel="stylesheet" href="style.css">
     <link rel="manifest" href="/manifest.json">
+    <link id="favicon" rel="icon" href="/public/favOff.svg" type="image/svg+xml">
 </head>
 
 <body>
@@ -4703,7 +4704,8 @@
     <div class="info" id="statusContainer">
         Dies ist nur eine Demo. Klicke auf die Lampe </br>um zwischen closed & open zu wechseln.
     </div>
-    </main>
+    <button class= "addToHomeScreen" id="addToHomeScreen">ALS APP ZUM </br>STARTBILDSCHIRM</br>HINZUFÜGEN</button>    
+</main>
     <footer class="footer">
             <a href="https://das-gaengeviertel.info/" target="_blank">
             <svg class="logoGaenge" version="1.1" id="Ebene_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
@@ -4761,6 +4763,12 @@
        </g>
        </svg>
     </a>
+   
+        </section>
+        <p class="rights" >© 2024 Das Leuchten.  </br> All rights reserved.</p>
+    </footer>
+
+    <script src="script.js"></script>
     <script>
         if ('serviceWorker' in navigator) {
           navigator.serviceWorker.register('/service-worker.js')
@@ -4772,11 +4780,6 @@
           });
         }
       </script>
-        </section>
-        <p class="rights" >© 2024 Das Leuchten.  </br> All rights reserved.</p>
-    </footer>
-
-    <script src="script.js"></script>
 </body>
 
 </html>
