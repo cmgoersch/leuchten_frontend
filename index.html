@@ -7,6 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>leuchten</title>
     <link rel="stylesheet" href="style.css">
+    <link rel="manifest" href="/manifest.json">
 </head>
 
 <body>
@@ -4760,6 +4761,17 @@
        </g>
        </svg>
     </a>
+    <script>
+        if ('serviceWorker' in navigator) {
+          navigator.serviceWorker.register('/service-worker.js')
+          .then(function(registration) {
+            console.log('Service Worker Registered', registration);
+          })
+          .catch(function(error) {
+            console.log('Service Worker Registration failed', error);
+          });
+        }
+      </script>
         </section>
         <p class="rights" >© 2024 Das Leuchten.  </br> All rights reserved.</p>
     </footer>
