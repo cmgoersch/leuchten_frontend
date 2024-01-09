@@ -96,8 +96,6 @@ initializeDisplay();
 
 
 
-
-
 // Rufe die Initialisierungsfunktion auf, wenn das Fenster geladen wird
 window.onload = initializeDisplay;
 
