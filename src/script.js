@@ -114,3 +114,4 @@ self.addEventListener('fetch', (event) => {
 document.getElementById('addToHomeScreen').addEventListener('click', function() {
     alert('Um diese App zum Startbildschirm hinzuzufügen, öffnen Sie das Browser-Menü und wählen Sie "Zum Startbildschirm hinzufügen".');
   });
+
