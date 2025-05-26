@@ -102,5 +102,5 @@ async function fetchStatusAndUpdate() {
   }
 }
 
-setInterval(fetchStatusAndUpdate, 5000);
+setInterval(fetchStatusAndUpdate, 60000);
 window.onload = fetchStatusAndUpdate;
