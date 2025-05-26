@@ -9,9 +9,6 @@
     <link rel="stylesheet" href="style.css">
     <link rel="manifest" href="/manifest.json">
    <link id="favicon" rel="icon" href="public/favOff.svg" type="image/svg+xml">
-   <script>
-  navigator.serviceWorker.register('service-worker.js');
-</script>
 </head>
 
 <body>
@@ -4771,17 +4768,7 @@
     </footer>
 
     <script src="script.js"></script>
-    <script>
-        if ('serviceWorker' in navigator) {
-          navigator.serviceWorker.register('/service-worker.js')
-          .then(function(registration) {
-            console.log('Service Worker Registered', registration);
-          })
-          .catch(function(error) {
-            console.log('Service Worker Registration failed', error);
-          });
-        }
-      </script>
+
 </body>
 
 </html>

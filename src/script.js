@@ -14,12 +14,6 @@ if (copyrightElement) {
   copyrightElement.innerHTML = `© ${currentYear} Das Leuchten.<br> All rights reserved.`;
 }
 
-if ('serviceWorker' in navigator) {
-  navigator.serviceWorker.register('service-worker.js').catch(err =>
-    console.error('Service Worker Registration failed', err)
-  );
-}
-
 // Timer-Logik
 let timerId = null;
 let localUptimeSeconds = 0;
