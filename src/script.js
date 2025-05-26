@@ -1,117 +1,106 @@
-var openLamb = document.getElementById('open_lamb');
-var closedLamb = document.getElementById('closed_lamb');
-var openPlate = document.getElementById('open_plate');
-var closedPlate = document.getElementById('closed_plate');
-var statusContainer = document.getElementById('statusContainer');
-var counterContainer = document.getElementById('counterContainer');
+const openLamb = document.getElementById('open_lamb');
+const closedLamb = document.getElementById('closed_lamb');
+const openPlate = document.getElementById('open_plate');
+const closedPlate = document.getElementById('closed_plate');
+const statusContainer = document.getElementById('statusContainer');
+const counterContainer = document.getElementById('counterContainer');
+const minutesDisplay = document.getElementById('minutes');
+const secondsDisplay = document.getElementById('seconds');
+const favicon = document.getElementById('favicon');
+const copyrightElement = document.getElementById('copyright');
+const currentYear = new Date().getFullYear();
 
-let timerId = null; 
-let seconds = 0; 
-let minutes = 0;
+if (copyrightElement) {
+  copyrightElement.innerHTML = `© ${currentYear} Das Leuchten.<br> All rights reserved.`;
+}
 
-function initializeDisplay() {
-    statusContainer.style.display = 'block'; 
-    counterContainer.style.display = 'none'; 
+if ('serviceWorker' in navigator) {
+  navigator.serviceWorker.register('service-worker.js').catch(err =>
+    console.error('Service Worker Registration failed', err)
+  );
+}
 
+// Timer-Logik
+let timerId = null;
+let localUptimeSeconds = 0;
+
+function startTimer(initialSeconds) {
+  stopTimer(); // alten Timer beenden
+  localUptimeSeconds = initialSeconds;
+  updateDisplay(localUptimeSeconds);
+
+  timerId = setInterval(() => {
+    localUptimeSeconds++;
+    updateDisplay(localUptimeSeconds);
+  }, 1000);
+}
+
+function stopTimer() {
+  clearInterval(timerId);
+  timerId = null;
+  localUptimeSeconds = 0;
+  resetTimerDisplay();
+}
+
+function updateDisplay(seconds) {
+  const minutes = Math.floor(seconds / 60);
+  const secs = seconds % 60;
+  minutesDisplay.innerText = minutes;
+  secondsDisplay.innerText = secs;
+}
+
+function resetTimerDisplay() {
+  minutesDisplay.innerText = '0';
+  secondsDisplay.innerText = '0';
+}
+
+function toggleFavicon(state) {
+  favicon.href = state === 'on' ? '/public/favOn.svg' : '/public/favOff.svg';
+}
+
+async function fetchStatusAndUpdate() {
+  try {
+    const response = await fetch('http://localhost:3000/api/wled-status');
+    const data = await response.json();
+
+    console.log('Empfangener Status:', data);
+
+    if (data.state === 'on') {
+      // Anzeige: offen
+      openLamb.style.display = 'block';
+      closedLamb.style.display = 'none';
+      openPlate.style.display = 'block';
+      closedPlate.style.display = 'none';
+      statusContainer.style.display = 'none';
+      counterContainer.style.display = 'block';
+
+      if (data.uptimeSeconds != null) {
+        startTimer(data.uptimeSeconds);
+      }
+    } else {
+      // Anzeige: geschlossen oder unreachable
+      openLamb.style.display = 'none';
+      closedLamb.style.display = 'block';
+      openPlate.style.display = 'none';
+      closedPlate.style.display = 'block';
+      statusContainer.style.display = 'block';
+      counterContainer.style.display = 'none';
+      stopTimer();
+    }
+
+    toggleFavicon(data.state);
+  } catch (error) {
+    console.error('Fehler beim Abrufen der Daten vom lokalen Server:', error);
     openLamb.style.display = 'none';
     closedLamb.style.display = 'block';
     openPlate.style.display = 'none';
     closedPlate.style.display = 'block';
+    statusContainer.style.display = 'block';
+    counterContainer.style.display = 'none';
+    stopTimer();
+    toggleFavicon('off');
+  }
 }
 
-function toggleSvg() {
-    if(openLamb.style.display === 'block') {
-        openLamb.style.display = 'none';
-        closedLamb.style.display = 'block';
-        openPlate.style.display = 'none';
-        closedPlate.style.display = 'block';
-
-        statusContainer.style.display = 'block';
-        counterContainer.style.display = 'none';
-
-        stopTimer(); // Stoppt den Timer und setzt ihn zurück, wenn closedLamb angezeigt wird
-    } else {
-        openLamb.style.display = 'block';
-        closedLamb.style.display = 'none';
-        openPlate.style.display = 'block';
-        closedPlate.style.display = 'none';
-
-        statusContainer.style.display = 'none';
-        counterContainer.style.display = 'block';
-
-        startTimer(); // Startet den Timer, wenn openLamb angezeigt wird
-        counterContainer.innerHTML = 'Das grüne Leuchten ist seit <strong></br> <span id="minutes">0</span> Minuten und <span id="seconds">0</span> Sekunden </strong>geöffnet.'; // Setzt den ursprünglichen Text zurück
-    }
-
-    toggleFavicon(); // Fügt das Umschalten des Favicons hinzu
-}
-
-function toggleFavicon() {
-    var favicon = document.getElementById('favicon');
-    if(openLamb.style.display === 'block') {
-        favicon.href = '/public/favOn.svg'; // Pfad zum "eingeschalteten" Favicon
-    } else {
-        favicon.href = '/public/favOff.svg'; // Pfad zum "ausgeschalteten" Favicon
-    }
-}
-
-// Funktion zum Inkrementieren der Zeit
-function incrementTime() {
-    seconds++; // Erhöht die Sekunden um 1
-    if (seconds >= 60) {
-        minutes++; // Erhöht die Minuten um 1, wenn die Sekunden 60 erreichen
-        seconds = 0; // Setzt die Sekunden zurück auf 0
-    }
-    document.getElementById('seconds').innerText = seconds;
-    document.getElementById('minutes').innerText = minutes;
-}
-
-// Funktion zum Starten des Timers
-function startTimer() {
-    if (timerId === null) { // Startet das Intervall nur, wenn es nicht bereits läuft
-        timerId = setInterval(incrementTime, 1000);
-    }
-}
-
-// Funktion zum Stoppen und Zurücksetzen des Timers
-function stopTimer() {
-    if (timerId !== null) {
-        clearInterval(timerId); // Stoppt das Intervall
-        timerId = null;
-        seconds = 0;
-        minutes = 0;
-        document.getElementById('seconds').innerText = '0';
-        document.getElementById('minutes').innerText = '0';
-    }
-}
-
-// Event-Listener für das Klicken auf die SVG-Elemente
-openLamb.addEventListener('click', toggleSvg);
-closedLamb.addEventListener('click', toggleSvg);
-
-// Initialisiert die Anzeige beim Laden der Seite
-initializeDisplay();
-
-
-
-
-
-// Rufe die Initialisierungsfunktion auf, wenn das Fenster geladen wird
-window.onload = initializeDisplay;
-
-self.addEventListener('install', (event) => {
-    console.log('Service Worker installing.');
-});
-
-self.addEventListener('activate', (event) => {
-    console.log('Service Worker activated.');
-});
-
-self.addEventListener('fetch', (event) => {
-    // Hier können Sie benutzerdefinierte Logik für das Netzwerk-Request-Handling hinzufügen.
-});
-
-document.getElementById('addToHomeScreen').addEventListener('click', function() {
-    alert('Um diese App zum Startbildschirm hinzuzufügen, öffnen Sie das Browser-Menü und wählen Sie "Zum Startbildschirm hinzufügen".');
-  });
-
+setInterval(fetchStatusAndUpdate, 5000);
+window.onload = fetchStatusAndUpdate;

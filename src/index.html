@@ -8,7 +8,10 @@
     <title>leuchten</title>
     <link rel="stylesheet" href="style.css">
     <link rel="manifest" href="/manifest.json">
-    <link id="favicon" rel="icon" href="/public/favOff.svg" type="image/svg+xml">
+   <link id="favicon" rel="icon" href="public/favOff.svg" type="image/svg+xml">
+   <script>
+  navigator.serviceWorker.register('service-worker.js');
+</script>
 </head>
 
 <body>
@@ -4695,16 +4698,15 @@
         </section>
     </div>
     <div class="timerOff" id="statusContainer">
-        Das grüne Leuchten ist geschlossen. </br>  Wenn es öffnet, siehst du es hier.
+        Das Leuchten ist geschlossen. </br>  Wenn es geöffnet ist, siehst du es hier.
     </div>
     
     <div class="timerOn" id="counterContainer">
-        Das grüne Leuchten ist seit <span id="minutes">0</span> Minuten und <span id="seconds">0</span> Sekunden geöffnet.
+        Das Leuchten ist seit <span id="minutes">0</span> Minuten und <span id="seconds">0</span> Sekunden geöffnet.
     </div>
-    <div class="info" id="statusContainer">
+    <!-- <div class="info" id="statusContainer">
         Dies ist nur eine Demo. Klicke auf die Lampe </br>um zwischen closed & open zu wechseln.
-    </div>
-    <button class= "addToHomeScreen" id="addToHomeScreen">ALS APP ZUM </br>STARTBILDSCHIRM</br>HINZUFÜGEN</button>    
+    </div> -->
 </main>
     <footer class="footer">
             <a href="https://das-gaengeviertel.info/" target="_blank">
@@ -4765,7 +4767,7 @@
     </a>
    
         </section>
-        <p class="rights" >© 2024 Das Leuchten.  </br> All rights reserved.</p>
+        <p id="copyright" class="rights">© 2025 Das Leuchten. <br> All rights reserved.</p>
     </footer>
 
     <script src="script.js"></script>
