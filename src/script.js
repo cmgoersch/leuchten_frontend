@@ -49,7 +49,7 @@ function resetTimerDisplay() {
 }
 
 function toggleFavicon(state) {
-  favicon.href = state === 'on' ? '/public/favOn.svg' : '/public/favOff.svg';
+  favicon.href = state === 'on' ? '/favOn.svg' : '/favOff.svg';
 }
 
 async function fetchStatusAndUpdate() {
