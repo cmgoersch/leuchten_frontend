@@ -72,9 +72,9 @@ body {
 }
 
 
-.footer {
+/* .footer {
     display: flex;
-    justify-content: space-between; 
+    flex-direction:row;
     align-items: center; 
     padding: 0.5rem;
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
@@ -94,15 +94,33 @@ body {
 .rights {
     margin: 1rem;
     text-align: right; 
-    flex: 1; 
-}
+    flex: 1;
+} */
 
-.info {
+
+.footer {
+    display: flex;
+    flex-direction: row;
+    align-items: center;     /* vertikale Zentrierung */
+    justify-content: space-between; /* verteilt Platz zwischen den Elementen */
+    padding: 0.5rem;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
     color: #b3b3b3;
     font-size: 0.76rem;
-    text-align: center; 
-    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-    flex: 1; 
+    flex-wrap: nowrap;       /* verhindert Umbruch */
+}
+
+.logoGaenge {
+    width: 60px; 
+    
+    color: #b3b3b3;
+    flex: 0 0 auto; 
+}
+
+.rights {
+    margin: 0;
+    text-align: right;
+    flex: 1;
 }
 
 @keyframes rotateAndScale {
