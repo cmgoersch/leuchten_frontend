@@ -24,7 +24,7 @@ jobs:
         with:
           # list of Docker images to use as base name for tags
           images: |
-            ghcr.io/cmgoersch/leuchten-status-server
+            ghcr.io/cmgoersch/leuchten_frontend
           # generate Docker tags based on the following events/attributes
           tags: |
             type=schedule
