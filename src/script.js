@@ -12,7 +12,7 @@ const counterContainer = document.getElementById('counterContainer');
 const hoursDisplay     = document.getElementById('hours');
 const minutesDisplay   = document.getElementById('minutes');
 const secondsDisplay   = document.getElementById('seconds');
-const hoursBlock       = document.getElementById('hoursBlock');   // optional (nur wenn im HTML vorhanden)
+const hoursBlock       = document.getElementById('hoursBlock');
 
 const favicon          = document.getElementById('favicon');
 const copyrightElement = document.getElementById('copyright');
