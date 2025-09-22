@@ -1,21 +1,19 @@
 /* ===== Base: body unverändert lassen ===== */
 body {
-  background-color: #333333; /* wie bei dir */
-  margin: 0;                 /* Browser-Default neutralisieren */
-  color: aliceblue;          /* für deine Timer-Texte passend */
-  /* KEIN display:flex/grid hier -> keine Abstandsänderungen */
+  background-color: #333333;
+  margin: 0;
+  color: aliceblue; 
 }
 
-/* ===== Seiten-Wrapper: sorgt für Sticky-Footer ohne Overlay ===== */
-/* Einmalig <div class="page"> um Header+Content+Footer legen */
+
 .page {
-  min-height: 100vh;       /* so hoch wie der Viewport */
+  min-height: 100vh; 
   display: flex;
-  flex-direction: column;  /* Footer ans Ende schieben */
+  flex-direction: column; 
 }
 
 main {
-  flex: 1 0 auto;          /* Inhalt nimmt Resthöhe, Footer bleibt unten */
+  flex: 1 0 auto; 
 }
 
 /* ===== Header / Logo (unverändert) ===== */
@@ -68,8 +66,8 @@ main {
 .lang-switch {
   display: inline-flex;
   align-items: center;
-  background: #444;               /* dunkler Hintergrund */
-  border-radius: 999px;           /* pillenförmig */
+  background: #444; 
+  border-radius: 999px;
   padding: 4px;
   position: relative;
   overflow: hidden;
@@ -77,7 +75,7 @@ main {
 
 .lang-switch button {
   flex: 1;
-  background: transparent;        /* keine eigene Fläche */
+  background: transparent;
   border: none;
   color: #ccc;
   font-weight: 600;
@@ -85,12 +83,12 @@ main {
   padding: 6px 16px;
   cursor: pointer;
   position: relative;
-  z-index: 2;                     /* über dem Hintergrund */
+  z-index: 2;
   transition: color 0.3s ease;
 }
 
 .lang-switch button[aria-pressed="true"] {
-  color: #fff;                    /* aktiver Button heller */
+  color: #fff; 
 }
 
 /* animierter Highlight-Hintergrund */
@@ -120,7 +118,7 @@ main {
 
 .footer {
   display: grid;
-  grid-template-columns: 1fr auto 1fr; /* linke/rechte Spalte gleich elastisch */
+  grid-template-columns: 1fr auto 1fr;
   align-items: center;
   gap: 0.5rem;
   padding: 0.5rem;
@@ -167,7 +165,7 @@ main {
 /* ===== Responsive nur für den Footer (Body bleibt unberührt) ===== */
 @media (max-width: 480px) {
   .footer {
-    grid-template-columns: 1fr auto; /* zwei Spalten */
+    grid-template-columns: 1fr auto;
     row-gap: 0.25rem;
   }
   .footer .logo       { justify-self: start; }
