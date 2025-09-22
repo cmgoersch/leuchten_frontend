@@ -113,16 +113,12 @@ main {
   right: 4px;
 }
 
-/* wenn DE aktiv → Highlight nach links schieben (Standard) */
 .lang-switch[data-active="de"]::before {
   left: 4px;
   right: 50%;
 }
 
-/* ===== Footer: im normalen Fluss, verdeckt nichts =====
-   Grid mit 3 Spalten: links Logo, Mitte Text (wirklich zentriert), rechts Buttons */
 .footer {
-  /* KEIN position: sticky/fixed -> kann nichts überdecken */
   display: grid;
   grid-template-columns: 1fr auto 1fr; /* linke/rechte Spalte gleich elastisch */
   align-items: center;
@@ -132,18 +128,19 @@ main {
   color: #b3b3b3;
   font-size: 0.76rem;
   background: #333333;
-  border-top: 1px solid #444;
+
+  max-width: 600px;  
+  margin: 0 auto; 
 }
 
-.footer .logo { margin: 0; }     /* kein Extraabstand im Footer */
+.footer .logo { margin: 0; }   
 
 .logoGaenge {
-  width: 60px;                  /* wie bei dir */
+  width: 60px;
   color: #b3b3b3;
   display: block;
 }
 
-/* Mitte exakt zentriert – unabhängig von Links/Rechts */
 .rights {
   margin: 0;
   text-align: center;
