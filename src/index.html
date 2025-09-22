@@ -4694,13 +4694,21 @@
 
         </section>
     </div>
-    <div class="timerOff" id="statusContainer">
-        Das Leuchten ist geschlossen. </br>  Wenn es geöffnet ist, siehst du es hier.
-    </div>
-    
-    <div class="timerOn" id="counterContainer">
-        Das Leuchten ist seit <span id="minutes">0</span> Minuten und <span id="seconds">0</span> Sekunden geöffnet.
-    </div>
+<div class="timerOff" id="statusContainer">
+  <span id="closedLine1">Das Leuchten ist geschlossen.</span><br>
+  <span id="closedLine2">Wenn es geöffnet ist, siehst du es hier.</span>
+</div>
+
+<div class="timerOn" id="counterContainer">
+  <span id="openedText">Das Leuchten ist seit</span>
+  <span id="hoursBlock">
+    <span id="hours">0</span> <span id="hoursLabel">Stunden</span>, 
+  </span>
+  <span id="minutes">0</span> <span id="minutesLabel">Minuten</span>
+  <span id="andLabel">und</span>
+  <span id="seconds">0</span> <span id="secondsLabel">Sekunden</span>
+  <span id="openedSuffix">geöffnet.</span>
+</div>
 </main>
     <footer class="footer">
         <div class="logo">
@@ -4764,6 +4772,10 @@
      <div class="copyright">
         <p id="2025" class="rights">© 2025 Das Leuchten. <br> All rights reserved.</p>
         </div>
+          <div class="lang-switch" aria-label="Language switch">
+  <button id="btnDE" type="button" aria-pressed="true">DE</button>
+  <button id="btnEN" type="button" aria-pressed="false">EN</button>
+</div>
     </footer>
 
     <script src="script.js"></script>
