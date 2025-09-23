@@ -179,7 +179,7 @@ const i18n = {
   en: {
     closed1: 'Das Leuchten is closed.',
     closed2: 'When it is open, you will see it here.',
-    openedText: 'The light has been open for',
+    openedText: 'Das Leuchten has been open for',
     hoursLabel: 'hours',
     minutesLabel: 'minutes',
     secondsLabel: 'seconds',
