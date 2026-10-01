@@ -13,8 +13,11 @@ const hoursDisplay     = document.getElementById('hours');
 const minutesDisplay   = document.getElementById('minutes');
 const secondsDisplay   = document.getElementById('seconds');
 const hoursBlock       = document.getElementById('hoursBlock');
+const hoursLabel       = document.getElementById('hoursLabel');
+const minutesLabel     = document.getElementById('minutesLabel');
+const secondsLabel     = document.getElementById('secondsLabel');
 
-const favicon          = document.getElementById('favicon');
+const favicon         = document.getElementById('favicon');
 const copyrightElement = document.getElementById('copyright');
 
 // --- Footer-Copyright dynamisch ---
@@ -57,26 +60,28 @@ function updateDisplay(totalSeconds) {
 
   if (hoursDisplay)   hoursDisplay.textContent   = String(hours);
   if (minutesDisplay) minutesDisplay.textContent = String(minutes);
-  if (secondsDisplay) secondsDisplay.textContent = String(secs).padStart(2, '0'); 
+  if (secondsDisplay) secondsDisplay.textContent = String(secs);
 
   if (hoursBlock) {
     hoursBlock.style.display = hours > 0 ? 'inline' : 'none';
   }
 
-  if (hoursLabel) {
-    const lang = localStorage.getItem('lang') || 'de';
-    if (lang === 'de') {
-      hoursLabel.textContent = hours === 1 ? 'Stunde' : 'Stunden';
-    } else {
-      hoursLabel.textContent = hours === 1 ? 'hour' : 'hours';
-    }
-  }
+  updateUnitLabels(hours, minutes, secs);
+}
+
+// Einheiten passend zu Sprache und Anzahl (1 Stunde / 2 Stunden)
+function updateUnitLabels(hours, minutes, secs) {
+  const t = i18n[document.documentElement.lang] || i18n.de;
+  setText(hoursLabel,   hours   === 1 ? t.hour   : t.hours);
+  setText(minutesLabel, minutes === 1 ? t.minute : t.minutes);
+  setText(secondsLabel, secs    === 1 ? t.second : t.seconds);
 }
 
 function resetTimerDisplay() {
   if (hoursDisplay)   hoursDisplay.textContent   = '0';
   if (minutesDisplay) minutesDisplay.textContent = '0';
   if (secondsDisplay) secondsDisplay.textContent = '0';
+  updateUnitLabels(0, 0, 0);
 }
 
 // --- Sonstiges UI ---
@@ -157,10 +162,7 @@ const langSwitch = document.querySelector('.lang-switch');
 const closedLine1   = document.getElementById('closedLine1');
 const closedLine2   = document.getElementById('closedLine2');
 const openedText    = document.getElementById('openedText');
-const hoursLabel    = document.getElementById('hoursLabel');
-const minutesLabel  = document.getElementById('minutesLabel');
-const secondsLabel  = document.getElementById('secondsLabel');
-const andLabel      = document.getElementById('andLabel');
+const andLabel     = document.getElementById('andLabel');
 const openedSuffix  = document.getElementById('openedSuffix');
 
 // Sprachdaten
@@ -169,9 +171,9 @@ const i18n = {
     closed1: 'Das Leuchten ist geschlossen.',
     closed2: 'Wenn es geöffnet ist, siehst du es hier.',
     openedText: 'Das Leuchten ist seit',
-    hoursLabel: 'Stunden',
-    minutesLabel: 'Minuten',
-    secondsLabel: 'Sekunden',
+    hour: 'Stunde',     hours: 'Stunden',
+    minute: 'Minute',   minutes: 'Minuten',
+    second: 'Sekunde',  seconds: 'Sekunden',
     andLabel: 'und',
     openedSuffix: 'geöffnet.',
     ui: { btnDE: 'DE', btnEN: 'EN' }
@@ -180,9 +182,9 @@ const i18n = {
     closed1: 'Das Leuchten is closed.',
     closed2: 'When it is open, you will see it here.',
     openedText: 'Das Leuchten has been open for',
-    hoursLabel: 'hours',
-    minutesLabel: 'minutes',
-    secondsLabel: 'seconds',
+    hour: 'hour',       hours: 'hours',
+    minute: 'minute',   minutes: 'minutes',
+    second: 'second',   seconds: 'seconds',
     andLabel: 'and',
     openedSuffix: '',
     ui: { btnDE: 'DE', btnEN: 'EN' }
@@ -207,10 +209,7 @@ function applyLanguage(lang) {
   setText(closedLine1,  t.closed1);
   setText(closedLine2,  t.closed2);
   setText(openedText,   t.openedText);
-  setText(hoursLabel,   t.hoursLabel);
-  setText(minutesLabel, t.minutesLabel);
-  setText(secondsLabel, t.secondsLabel);
-  setText(andLabel,     t.andLabel);
+  setText(andLabel,    t.andLabel);
   setText(openedSuffix, t.openedSuffix);
 
   // Toggle-UI synchronisieren
@@ -230,6 +229,9 @@ function applyLanguage(lang) {
 
   // <html lang="…"> setzen (SEO/AT, Screenreader)
   document.documentElement.setAttribute("lang", safeLang);
+
+  // Einheiten (Stunde/Stunden …) sofort in der neuen Sprache anzeigen
+  updateDisplay(localUptimeSeconds);
 
   // Persistieren
   localStorage.setItem("lang", safeLang);
