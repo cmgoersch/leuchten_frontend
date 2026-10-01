@@ -9,10 +9,13 @@ const closedPlate      = document.getElementById('closed_plate');
 const statusContainer  = document.getElementById('statusContainer');
 const counterContainer = document.getElementById('counterContainer');
 
+const daysDisplay      = document.getElementById('days');
 const hoursDisplay     = document.getElementById('hours');
 const minutesDisplay   = document.getElementById('minutes');
 const secondsDisplay   = document.getElementById('seconds');
+const daysBlock        = document.getElementById('daysBlock');
 const hoursBlock       = document.getElementById('hoursBlock');
+const daysLabel        = document.getElementById('daysLabel');
 const hoursLabel       = document.getElementById('hoursLabel');
 const minutesLabel     = document.getElementById('minutesLabel');
 const secondsLabel     = document.getElementById('secondsLabel');
@@ -54,34 +57,42 @@ function stopTimer() {
 }
 
 function updateDisplay(totalSeconds) {
-  const hours   = Math.floor(totalSeconds / 3600);
+  const days    = Math.floor(totalSeconds / 86400);
+  const hours   = Math.floor((totalSeconds % 86400) / 3600);
   const minutes = Math.floor((totalSeconds % 3600) / 60);
   const secs    = totalSeconds % 60;
 
+  if (daysDisplay)    daysDisplay.textContent    = String(days);
   if (hoursDisplay)   hoursDisplay.textContent   = String(hours);
   if (minutesDisplay) minutesDisplay.textContent = String(minutes);
   if (secondsDisplay) secondsDisplay.textContent = String(secs);
 
+  // Tage erst ab 24 Stunden anzeigen
+  if (daysBlock) {
+    daysBlock.style.display = days > 0 ? 'inline' : 'none';
+  }
   if (hoursBlock) {
-    hoursBlock.style.display = hours > 0 ? 'inline' : 'none';
+    hoursBlock.style.display = days > 0 || hours > 0 ? 'inline' : 'none';
   }
 
-  updateUnitLabels(hours, minutes, secs);
+  updateUnitLabels(days, hours, minutes, secs);
 }
 
 // Einheiten passend zu Sprache und Anzahl (1 Stunde / 2 Stunden)
-function updateUnitLabels(hours, minutes, secs) {
+function updateUnitLabels(days, hours, minutes, secs) {
   const t = i18n[document.documentElement.lang] || i18n.de;
+  setText(daysLabel,    days    === 1 ? t.day    : t.days);
   setText(hoursLabel,   hours   === 1 ? t.hour   : t.hours);
   setText(minutesLabel, minutes === 1 ? t.minute : t.minutes);
   setText(secondsLabel, secs    === 1 ? t.second : t.seconds);
 }
 
 function resetTimerDisplay() {
+  if (daysDisplay)    daysDisplay.textContent    = '0';
   if (hoursDisplay)   hoursDisplay.textContent   = '0';
   if (minutesDisplay) minutesDisplay.textContent = '0';
   if (secondsDisplay) secondsDisplay.textContent = '0';
-  updateUnitLabels(0, 0, 0);
+  updateUnitLabels(0, 0, 0, 0);
 }
 
 // --- Sonstiges UI ---
@@ -171,6 +182,7 @@ const i18n = {
     closed1: 'Das Leuchten ist geschlossen.',
     closed2: 'Wenn es geöffnet ist, siehst du es hier.',
     openedText: 'Das Leuchten ist seit',
+    day: 'Tag',         days: 'Tage',
     hour: 'Stunde',     hours: 'Stunden',
     minute: 'Minute',   minutes: 'Minuten',
     second: 'Sekunde',  seconds: 'Sekunden',
@@ -182,6 +194,7 @@ const i18n = {
     closed1: 'Das Leuchten is closed.',
     closed2: 'When it is open, you will see it here.',
     openedText: 'Das Leuchten has been open for',
+    day: 'day',         days: 'days',
     hour: 'hour',       hours: 'hours',
     minute: 'minute',   minutes: 'minutes',
     second: 'second',   seconds: 'seconds',
